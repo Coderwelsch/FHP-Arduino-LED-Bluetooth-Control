@@ -1,0 +1,13 @@
+{
+	"name": "cordova-mobile-led-control",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start-ios": "cd bluetooth-control; cordova emulate ios",
+		"build-ios": "cd bluetooth-control; cordova build ios",
+		"additional-install": "sudo npm i cordova ios-sim -g"
+	},
+	"author": "",
+	"license": "ISC"
+}
