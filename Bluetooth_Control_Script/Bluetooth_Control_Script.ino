@@ -1,6 +1,7 @@
 // includes
 #include <FastLED.h>
 #include <EEPROM.h>
+#include <SoftwareSerial.h>
 
 // defines
 #define RX_PIN 10
@@ -15,6 +16,7 @@
 #define SAVE_ADDR_COLOR 1
 
 // global vars
+SoftwareSerial SoftSerial( 10, 11 );
 String btData;
 CRGB leds[ NUM_LEDS ];
 
@@ -25,7 +27,7 @@ void setup () {
 	delay( 3000 );
 
 	Serial.begin( 9600 );
-	Serial.println( "Bluetooth available" );
+	SoftSerial.begin( 9600 );
 
 	initLED();
 }
@@ -100,15 +102,17 @@ String getSerialData () {
 	String junk;
 	String returnValue = "";
 
-	if ( Serial.available() ) {
-		while ( Serial.available() ) {
-			returnValue += (char) Serial.read();
+	if ( SoftSerial.available() ) {
+		while ( SoftSerial.available() ) {
+			returnValue += (char) SoftSerial.read();
 		}
 
 		// clear left junk
-		while ( Serial.available() > 0 ) {
-			junk = Serial.read();
+		while ( SoftSerial.available() > 0 ) {
+			junk = SoftSerial.read();
 		}
+
+		Serial.println( returnValue );
 	}
 
 	return returnValue;
